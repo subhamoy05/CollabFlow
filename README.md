@@ -148,8 +148,5 @@ Restrict database network access wherever possible instead of allowing unrestric
 - `docs/SOCKET_EVENTS.md` — Real-time event documentation.
 - `docs/ARCHITECTURE.md` — System architecture and access-control design.
 
-## 📄 License
-
-MIT License.
 
 **CollabFlow — One workspace. Better teamwork.**
