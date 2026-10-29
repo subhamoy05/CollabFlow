@@ -96,7 +96,7 @@ npm run dev
 
 ```bash
 npm run bootstrap:admin
-npm run seed
+
 ```
 
 Run seed scripts only in a development database. Never use predictable demo credentials in production.
