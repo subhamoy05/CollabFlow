@@ -25,12 +25,12 @@ import { EmptyState } from '../../components/common/EmptyState';
 import { Avatar } from '../../components/common/Avatar';
 
 const COLOR_PRESETS = [
-  '#6366F1', // Indigo
-  '#3B82F6', // Blue
+  '#A31C1B', // Crimson
   '#10B981', // Emerald
   '#F59E0B', // Amber
-  '#EC4899', // Pink
+  '#3B82F6', // Blue
   '#8B5CF6', // Purple
+  '#EC4899', // Pink
   '#06B6D4'  // Cyan
 ];
 
@@ -49,7 +49,7 @@ export function ProjectsPage() {
   const [title, setTitle] = useState('');
   const [key, setKey] = useState('');
   const [description, setDescription] = useState('');
-  const [color, setColor] = useState('#6366F1');
+  const [color, setColor] = useState('#A31C1B');
   const [isPrivate, setIsPrivate] = useState(false);
   const navigate = useNavigate();
 
@@ -119,18 +119,18 @@ export function ProjectsPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto">
+    <div className="space-y-6 max-w-7xl mx-auto text-slate-100">
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+          <h1 className="text-xl font-bold text-white">
             Projects
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-400 mt-0.5">
             Organize work streams, Kanban boards, sprint cycles, and deliverables.
           </p>
         </div>
-        <Button icon={Plus} size="sm" onClick={() => setIsCreateModalOpen(true)}>
+        <Button variant="crimson" icon={Plus} size="sm" onClick={() => setIsCreateModalOpen(true)} className="shadow-glow-crimson">
           New Project
         </Button>
       </div>
@@ -144,14 +144,14 @@ export function ProjectsPage() {
             placeholder="Search projects by title, key, or description..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-3.5 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full pl-9 pr-3.5 py-2 text-xs rounded-xl bg-[#171717] border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#A31C1B] focus:ring-2 focus:ring-[#A31C1B]/20"
           />
         </div>
         <div className="flex items-center gap-2">
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="text-xs rounded-xl bg-[#171717] border border-white/10 px-3 py-2 text-white focus:outline-none focus:border-[#A31C1B] focus:ring-2 focus:ring-[#A31C1B]/20"
           >
             <option value="all">All Statuses</option>
             <option value="Active">Active</option>
@@ -193,12 +193,12 @@ export function ProjectsPage() {
                     <div className="flex items-center gap-2.5">
                       <div
                         className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-xs"
-                        style={{ backgroundColor: proj.color || '#6366F1' }}
+                        style={{ backgroundColor: proj.color || '#A31C1B' }}
                       >
                         {proj.key}
                       </div>
                       <div>
-                        <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 line-clamp-1">
+                        <h3 className="text-sm font-bold text-slate-100 line-clamp-1">
                           {proj.title}
                         </h3>
                         <div className="text-[10px] text-slate-400 font-mono">
@@ -209,25 +209,25 @@ export function ProjectsPage() {
                     <Badge size="xs">{proj.status}</Badge>
                   </div>
 
-                  <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-4 leading-relaxed">
+                  <p className="text-xs text-slate-400 line-clamp-2 mb-4 leading-relaxed">
                     {proj.description || 'No description provided.'}
                   </p>
                 </div>
 
                 {/* Progress bar and metrics */}
-                <div className="pt-4 border-t border-slate-100 dark:border-slate-800/80">
-                  <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 mb-1.5 font-medium">
+                <div className="pt-4 border-t border-white/10">
+                  <div className="flex items-center justify-between text-[11px] text-slate-400 mb-1.5 font-medium">
                     <span>Progress ({stats.completedTasks}/{stats.totalTasks} tasks)</span>
-                    <span className="font-semibold text-slate-700 dark:text-slate-300">
+                    <span className="font-semibold text-rose-300">
                       {stats.progress}%
                     </span>
                   </div>
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                  <div className="w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
                     <div
-                      className="h-1.5 rounded-full transition-all duration-500"
+                      className="h-1.5 rounded-full transition-all duration-500 shadow-[0_0_8px_rgba(163,28,27,0.5)]"
                       style={{
                         width: `${stats.progress}%`,
-                        backgroundColor: proj.color || '#6366F1'
+                        backgroundColor: proj.color || '#A31C1B'
                       }}
                     />
                   </div>
@@ -290,7 +290,7 @@ export function ProjectsPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-200 mb-1.5">
               Description (Optional)
             </label>
             <textarea
@@ -298,13 +298,13 @@ export function ProjectsPage() {
               placeholder="Provide context regarding the project goals..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 p-3 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full text-xs rounded-xl bg-[#06110C] border border-white/10 p-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#A31C1B] focus:ring-2 focus:ring-[#A31C1B]/20"
             />
           </div>
 
           {/* Color Preset Selector */}
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-200 mb-1.5">
               Project Accent Color
             </label>
             <div className="flex items-center gap-2">
@@ -314,7 +314,7 @@ export function ProjectsPage() {
                   key={c}
                   onClick={() => setColor(c)}
                   className={`w-7 h-7 rounded-lg transition-transform ${
-                    color === c ? 'scale-110 ring-2 ring-indigo-500 ring-offset-2' : ''
+                    color === c ? 'scale-110 ring-2 ring-[#A31C1B] ring-offset-2 ring-offset-[#171717]' : ''
                   }`}
                   style={{ backgroundColor: c }}
                 />
@@ -329,18 +329,25 @@ export function ProjectsPage() {
               id="isPrivate"
               checked={isPrivate}
               onChange={(e) => setIsPrivate(e.target.checked)}
-              className="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4"
+              className="rounded accent-[#A31C1B] w-4 h-4 bg-[#06110C] border-white/10"
             />
-            <label htmlFor="isPrivate" className="text-xs text-slate-700 dark:text-slate-300 select-none">
+            <label htmlFor="isPrivate" className="text-xs text-slate-300 select-none">
               Make this project private (accessible only to invited members)
             </label>
           </div>
 
-          <div className="flex justify-end gap-2.5 pt-4 border-t border-slate-100 dark:border-slate-800">
-            <Button variant="secondary" size="sm" onClick={() => setIsCreateModalOpen(false)}>
+          <div className="flex justify-end gap-2.5 pt-4 border-t border-white/10">
+            <Button variant="charcoal" size="sm" onClick={() => setIsCreateModalOpen(false)}>
               Cancel
             </Button>
-            <Button type="submit" size="sm" loading={creating} disabled={!title.trim() || !key.trim()}>
+            <Button
+              type="submit"
+              variant="crimson"
+              size="sm"
+              loading={creating}
+              disabled={!title.trim() || !key.trim()}
+              className="shadow-glow-crimson"
+            >
               Create Project
             </Button>
           </div>

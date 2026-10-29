@@ -26,10 +26,10 @@ import { Spinner } from '../../components/common/Spinner';
 import { TaskDetailModal } from '../../components/tasks/TaskDetailModal';
 
 const COLUMNS = [
-  { id: 'Backlog', label: 'Backlog', color: '#94A3B8' },
-  { id: 'Todo', label: 'Todo', color: '#64748B' },
-  { id: 'In Progress', label: 'In Progress', color: '#6366F1' },
-  { id: 'In Review', label: 'In Review', color: '#A855F7' },
+  { id: 'Backlog', label: 'Backlog', color: '#6B7280' },
+  { id: 'Todo', label: 'Todo', color: '#9CA3AF' },
+  { id: 'In Progress', label: 'In Progress', color: '#A31C1B' },
+  { id: 'In Review', label: 'In Review', color: '#C084FC' },
   { id: 'Done', label: 'Done', color: '#10B981' }
 ];
 
@@ -217,7 +217,7 @@ export function ProjectBoardPage() {
           <div className="flex items-center gap-2 mb-1">
             <span
               className="w-5 h-5 rounded-md flex items-center justify-center text-white font-bold text-[10px]"
-              style={{ backgroundColor: project?.color || '#6366F1' }}
+              style={{ backgroundColor: project?.color || '#A31C1B' }}
             >
               {project?.key}
             </span>
@@ -240,7 +240,7 @@ export function ProjectBoardPage() {
         <div className="flex items-center gap-2">
           <Button
             size="sm"
-            variant="secondary"
+            variant="glass"
             icon={MessageSquare}
             onClick={() => navigate(`/app/projects/${projectId}/chat`)}
           >
@@ -248,7 +248,7 @@ export function ProjectBoardPage() {
           </Button>
           <Button
             size="sm"
-            variant="secondary"
+            variant="glass"
             icon={BarChart3}
             onClick={() => navigate(`/app/reports`)}
           >
@@ -256,6 +256,7 @@ export function ProjectBoardPage() {
           </Button>
           <Button
             size="sm"
+            variant="gradient"
             icon={Plus}
             onClick={() => setQuickCreateColumn('Todo')}
           >
@@ -265,39 +266,39 @@ export function ProjectBoardPage() {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-200/80 dark:border-slate-800">
-        <div className="relative w-full sm:w-72">
-          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-3 rounded-2xl glass-card">
+        <div className="relative w-full sm:w-80">
+          <Search className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Filter tasks by title or key..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-8 pr-3 py-1.5 text-xs rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full pl-8 pr-3 py-1.5 text-xs rounded-xl bg-[#171717] border border-white/10 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#A31C1B]/20 focus:border-[#A31C1B] transition-all"
           />
         </div>
 
-        <div className="flex items-center gap-2 w-full sm:w-auto">
+        <div className="flex items-center gap-2.5 w-full sm:w-auto">
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
-            className="text-xs rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-2.5 py-1.5 text-slate-800 dark:text-slate-200"
+            className="text-xs rounded-xl bg-[#171717] border border-white/10 px-3 py-1.5 text-slate-100 focus:outline-none focus:ring-2 focus:ring-[#A31C1B]/20 focus:border-[#A31C1B]"
           >
-            <option value="all">All Priorities</option>
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-            <option value="Urgent">Urgent</option>
+            <option value="all" className="bg-[#171717]">All Priorities</option>
+            <option value="Low" className="bg-[#171717]">Low</option>
+            <option value="Medium" className="bg-[#171717]">Medium</option>
+            <option value="High" className="bg-[#171717]">High</option>
+            <option value="Urgent" className="bg-[#171717]">Urgent</option>
           </select>
 
           <select
             value={assigneeFilter}
             onChange={(e) => setAssigneeFilter(e.target.value)}
-            className="text-xs rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-2.5 py-1.5 text-slate-800 dark:text-slate-200"
+            className="text-xs rounded-xl bg-[#171717] border border-white/10 px-3 py-1.5 text-slate-100 focus:outline-none focus:ring-2 focus:ring-[#A31C1B]/20 focus:border-[#A31C1B]"
           >
-            <option value="all">All Assignees</option>
-            <option value="me">Assigned to Me</option>
-            <option value="unassigned">Unassigned</option>
+            <option value="all" className="bg-[#171717]">All Assignees</option>
+            <option value="me" className="bg-[#171717]">Assigned to Me</option>
+            <option value="unassigned" className="bg-[#171717]">Unassigned</option>
           </select>
         </div>
       </div>
@@ -310,26 +311,29 @@ export function ProjectBoardPage() {
             return (
               <div
                 key={column.id}
-                className="w-72 flex-shrink-0 flex flex-col bg-slate-100/70 dark:bg-slate-900/60 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-3"
+                className="w-72 flex-shrink-0 flex flex-col bg-[#171717] rounded-2xl border border-white/10 p-3 shadow-lg"
               >
                 {/* Column Header */}
                 <div className="flex items-center justify-between mb-3 px-1">
                   <div className="flex items-center gap-2">
                     <span
-                      className="w-2.5 h-2.5 rounded-full"
-                      style={{ backgroundColor: column.color }}
+                      className="w-2.5 h-2.5 rounded-full shadow-xs"
+                      style={{
+                        backgroundColor: column.color,
+                        boxShadow: `0 0 8px ${column.color}80`
+                      }}
                     />
-                    <h3 className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                    <h3 className="text-xs font-bold text-white">
                       {column.label}
                     </h3>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold">
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#06110C] border border-white/10 text-slate-300 font-mono font-semibold">
                       {columnTasks.length}
                     </span>
                   </div>
                   <button
                     type="button"
                     onClick={() => setQuickCreateColumn(column.id)}
-                    className="p-1 rounded-md text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/60 dark:hover:bg-slate-800"
+                    className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
@@ -339,7 +343,7 @@ export function ProjectBoardPage() {
                 {quickCreateColumn === column.id && (
                   <form
                     onSubmit={(e) => handleQuickCreate(e, column.id)}
-                    className="mb-3 p-2.5 bg-white dark:bg-slate-900 rounded-xl border border-indigo-300 dark:border-indigo-700 shadow-sm space-y-2"
+                    className="mb-3 p-2.5 bg-[#06110C] rounded-xl border border-[#A31C1B]/60 shadow-sm space-y-2"
                   >
                     <input
                       type="text"
@@ -347,7 +351,7 @@ export function ProjectBoardPage() {
                       value={quickTitle}
                       onChange={(e) => setQuickTitle(e.target.value)}
                       autoFocus
-                      className="w-full text-xs bg-transparent border-0 focus:outline-none text-slate-900 dark:text-slate-100 placeholder:text-slate-400"
+                      className="w-full text-xs bg-transparent border-0 focus:outline-none text-white placeholder:text-slate-500"
                     />
                     <div className="flex justify-end gap-1.5">
                       <Button
@@ -360,7 +364,7 @@ export function ProjectBoardPage() {
                       >
                         Cancel
                       </Button>
-                      <Button type="submit" size="xs" disabled={!quickTitle.trim()}>
+                      <Button type="submit" size="xs" variant="crimson" disabled={!quickTitle.trim()}>
                         Add Card
                       </Button>
                     </div>
@@ -374,7 +378,7 @@ export function ProjectBoardPage() {
                       ref={provided.innerRef}
                       {...provided.droppableProps}
                       className={`flex-1 space-y-2.5 min-h-[300px] transition-colors rounded-xl p-1 ${
-                        snapshot.isDraggingOver ? 'bg-indigo-50/50 dark:bg-indigo-950/20' : ''
+                        snapshot.isDraggingOver ? 'bg-[#A31C1B]/10 rounded-xl' : ''
                       }`}
                     >
                       {columnTasks.map((task, index) => {
@@ -392,22 +396,22 @@ export function ProjectBoardPage() {
                                 {...dragProvided.draggableProps}
                                 {...dragProvided.dragHandleProps}
                                 onClick={() => setSelectedTaskId(task._id)}
-                                className={`p-3 rounded-xl bg-white dark:bg-slate-900 border text-xs shadow-xs cursor-pointer select-none transition-all ${
+                                className={`p-3.5 rounded-xl bg-[#06110C] border text-xs shadow-xs cursor-pointer select-none transition-all duration-200 ${
                                   dragSnapshot.isDragging
-                                    ? 'shadow-xl ring-2 ring-indigo-500 scale-102 border-indigo-400'
-                                    : 'border-slate-200/80 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
+                                    ? 'shadow-2xl ring-2 ring-[#A31C1B] scale-[1.03] border-[#A31C1B] rotate-1 z-50 shadow-glow-crimson'
+                                    : 'border-white/10 hover:border-[#A31C1B]/60 hover:shadow-glow-crimson hover:-translate-y-0.5'
                                 }`}
                               >
                                 {/* Key and Priority */}
                                 <div className="flex items-center justify-between gap-1 mb-1.5">
-                                  <span className="font-mono text-[10px] font-bold text-indigo-600 dark:text-indigo-400">
+                                  <span className="font-mono text-[10px] font-bold text-rose-400">
                                     {task.key}
                                   </span>
                                   <Badge size="xs">{task.priority}</Badge>
                                 </div>
 
                                 {/* Task Title */}
-                                <div className="font-semibold text-slate-800 dark:text-slate-200 line-clamp-2 mb-2.5 leading-snug">
+                                <div className="font-semibold text-slate-100 line-clamp-2 mb-2.5 leading-snug">
                                   {task.title}
                                 </div>
 

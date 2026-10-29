@@ -3,12 +3,133 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* High contrast visible focus outline */
+  :focus-visible {
+    @apply outline-none ring-2 ring-[#A31C1B] ring-offset-2 ring-offset-[#06110C];
   }
 }
 
-/* Custom subtle scrollbar */
+/* Glassmorphism utility classes tailored to #06110C base, #171717 surface & #A31C1B accent */
+.glass {
+  background: rgba(23, 23, 23, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass {
+  background: rgba(23, 23, 23, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(23, 23, 23, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(163, 28, 27, 0.5);
+}
+
+.dark .glass-card {
+  background: rgba(23, 23, 23, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+}
+
+.dark .glass-card:hover {
+  border-color: rgba(163, 28, 27, 0.5);
+}
+
+.glass-dropdown {
+  background: rgba(23, 23, 23, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.7);
+}
+
+.dark .glass-dropdown {
+  background: rgba(23, 23, 23, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Shimmer button reflection effect */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  transition: none;
+  pointer-events: none;
+}
+
+.btn-shimmer:hover::after {
+  left: 180%;
+  transition: all 0.75s ease-in-out;
+}
+
+/* Text gradient utility */
+.text-gradient {
+  @apply bg-gradient-to-r from-white via-rose-300 to-[#A31C1B] bg-clip-text text-transparent;
+}
+
+.text-gradient-cyan {
+  @apply bg-gradient-to-r from-rose-200 via-rose-400 to-[#A31C1B] bg-clip-text text-transparent;
+}
+
+.text-gradient-crimson {
+  @apply bg-gradient-to-r from-[#A31C1B] via-rose-500 to-amber-500 bg-clip-text text-transparent;
+}
+
+.crimson-glass-card {
+  background: rgba(23, 23, 23, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(163, 28, 27, 0.28);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(163, 28, 27, 0.15);
+}
+
+.crimson-glass-card:hover {
+  border-color: rgba(163, 28, 27, 0.6);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6), 0 0 30px -5px rgba(163, 28, 27, 0.35);
+}
+
+/* Custom sleek scrollbar with hover glow */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -19,14 +140,33 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+  background: rgba(148, 163, 184, 0.5);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  transition: background-color 0.2s ease;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.5);
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-400 dark:bg-slate-600;
+  background: rgba(163, 28, 27, 0.9);
 }
 
 /* Kanban column min-height & dragging polish */
 .kanban-column-content {
   min-height: calc(100vh - 240px);
+}
+
+/* Accessibility: Respect user motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

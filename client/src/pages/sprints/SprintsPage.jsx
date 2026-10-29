@@ -109,10 +109,10 @@ export function SprintsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-            <Zap className="w-5 h-5 text-indigo-600" /> Sprints & Iterations
+          <h1 className="text-xl font-bold text-slate-100 flex items-center gap-2">
+            <Zap className="w-5 h-5 text-[#A31C1B]" /> Sprints & Iterations
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-400 mt-0.5">
             Plan focused development cycles, burndown objectives, and velocity tracking.
           </p>
         </div>
@@ -121,16 +121,16 @@ export function SprintsPage() {
           <select
             value={selectedProjectId}
             onChange={(e) => setSelectedProjectId(e.target.value)}
-            className="text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="text-xs rounded-xl bg-[#171717] border border-white/10 px-3 py-2 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#A31C1B] focus:border-[#A31C1B]"
           >
             {projects.map((p) => (
-              <option key={p._id} value={p._id}>
+              <option key={p._id} value={p._id} className="bg-[#171717] text-slate-100">
                 {p.title} ({p.key})
               </option>
             ))}
           </select>
 
-          <Button icon={Plus} size="sm" onClick={() => setIsCreateModalOpen(true)}>
+          <Button icon={Plus} size="sm" variant="crimson" onClick={() => setIsCreateModalOpen(true)}>
             New Sprint
           </Button>
         </div>
@@ -191,6 +191,7 @@ export function SprintsPage() {
                     {sprint.status === 'Planned' && (
                       <Button
                         size="sm"
+                        variant="crimson"
                         icon={Play}
                         onClick={() => handleStartSprint(sprint._id)}
                       >
@@ -211,16 +212,16 @@ export function SprintsPage() {
                 </div>
 
                 {/* Progress bar & Workload breakdown */}
-                <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
-                  <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-400 mb-1.5 font-medium">
+                <div className="pt-4 border-t border-white/10">
+                  <div className="flex items-center justify-between text-xs text-slate-400 mb-1.5 font-medium">
                     <span>
                       {stats.completedTasks} of {stats.totalTasks} tasks completed
                     </span>
-                    <span className="font-bold">{stats.progress}%</span>
+                    <span className="font-bold text-rose-300">{stats.progress}%</span>
                   </div>
-                  <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
+                  <div className="w-full bg-white/5 rounded-full h-2 overflow-hidden border border-white/5">
                     <div
-                      className="bg-indigo-600 h-2 rounded-full transition-all duration-500"
+                      className="bg-[#A31C1B] shadow-[0_0_8px_rgba(163,28,27,0.5)] h-2 rounded-full transition-all duration-500"
                       style={{ width: `${stats.progress}%` }}
                     />
                   </div>
@@ -240,7 +241,7 @@ export function SprintsPage() {
       >
         <form onSubmit={handleCreateSprint} className="space-y-4">
           {error && (
-            <div className="p-3 rounded-xl bg-rose-50 text-rose-700 text-xs border border-rose-200">
+            <div className="p-3 rounded-xl bg-[#A31C1B]/20 text-rose-300 text-xs border border-[#A31C1B]/40">
               {error}
             </div>
           )}
@@ -255,7 +256,7 @@ export function SprintsPage() {
           />
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
               Sprint Goal
             </label>
             <textarea
@@ -263,13 +264,13 @@ export function SprintsPage() {
               placeholder="What is the objective of this sprint?"
               value={goal}
               onChange={(e) => setGoal(e.target.value)}
-              className="w-full text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 p-3 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full text-xs rounded-xl bg-[#06110C] border border-white/10 p-3 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#A31C1B] focus:border-[#A31C1B]"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
                 Start Date
               </label>
               <input
@@ -277,11 +278,11 @@ export function SprintsPage() {
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
                 required
-                className="w-full text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full text-xs rounded-lg bg-[#06110C] border border-white/10 px-3 py-2 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#A31C1B]"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
                 End Date
               </label>
               <input
@@ -289,16 +290,16 @@ export function SprintsPage() {
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
                 required
-                className="w-full text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full text-xs rounded-lg bg-[#06110C] border border-white/10 px-3 py-2 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#A31C1B]"
               />
             </div>
           </div>
 
-          <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100 dark:border-slate-800">
+          <div className="flex justify-end gap-2.5 pt-3 border-t border-white/10">
             <Button variant="secondary" size="sm" onClick={() => setIsCreateModalOpen(false)}>
               Cancel
             </Button>
-            <Button type="submit" size="sm" loading={creating} disabled={!name.trim() || !startDate || !endDate}>
+            <Button type="submit" variant="crimson" size="sm" loading={creating} disabled={!name.trim() || !startDate || !endDate}>
               Create Sprint
             </Button>
           </div>

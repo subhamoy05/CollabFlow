@@ -10,22 +10,26 @@ export function EmptyState({
   className = ''
 }) {
   return (
-    <div className={`flex flex-col items-center justify-center text-center p-8 rounded-xl border border-dashed border-slate-300 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 ${className}`}>
+    <div className={`flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-dashed border-white/10 bg-[#171717]/60 backdrop-blur-sm ${className}`}>
       {Icon && (
-        <div className="w-12 h-12 rounded-full bg-indigo-50 dark:bg-indigo-950/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-3.5">
-          <Icon className="w-6 h-6" />
+        <div className="relative mb-4 group">
+          {/* Subtle glowing halo behind icon */}
+          <div className="absolute inset-0 rounded-full bg-[#A31C1B]/20 blur-xl animate-pulse-slow" />
+          <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#171717] to-[#252525] border border-[#A31C1B]/40 flex items-center justify-center text-[#A31C1B] shadow-glow-crimson animate-float">
+            <Icon className="w-7 h-7" />
+          </div>
         </div>
       )}
-      <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-1">
+      <h4 className="text-base font-semibold text-slate-100 mb-1">
         {title}
       </h4>
       {description && (
-        <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mb-4 leading-relaxed">
+        <p className="text-xs text-slate-400 max-w-sm mb-4 leading-relaxed">
           {description}
         </p>
       )}
       {actionLabel && onAction && (
-        <Button size="sm" onClick={onAction}>
+        <Button variant="crimson" size="sm" onClick={onAction}>
           {actionLabel}
         </Button>
       )}

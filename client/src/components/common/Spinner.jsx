@@ -10,7 +10,7 @@ export function Spinner({ size = 'md', className = '' }) {
   return (
     <div className={`flex items-center justify-center p-4 ${className}`}>
       <svg
-        className={`animate-spin text-indigo-600 dark:text-indigo-400 ${sizes[size] || sizes.md}`}
+        className={`animate-spin text-[#A31C1B] ${sizes[size] || sizes.md}`}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

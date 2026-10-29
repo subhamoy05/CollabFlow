@@ -68,20 +68,20 @@ export function QuickTaskModal({ isOpen, onClose, onTaskCreated }) {
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
-          <div className="p-3 text-xs rounded-lg bg-rose-50 text-rose-700 border border-rose-200">
+          <div className="p-3 text-xs rounded-xl bg-[#A31C1B]/20 text-rose-300 border border-[#A31C1B]/50">
             {error}
           </div>
         )}
 
         <div>
-          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-200 mb-1.5">
             Project
           </label>
           <select
             value={projectId}
             onChange={(e) => setProjectId(e.target.value)}
             required
-            className="w-full text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 px-3.5 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full text-sm rounded-xl bg-[#06110C] border border-white/10 px-3.5 py-2 text-white focus:outline-none focus:border-[#A31C1B] focus:ring-2 focus:ring-[#A31C1B]/25"
           >
             {projects.map((p) => (
               <option key={p._id} value={p._id}>
@@ -101,7 +101,7 @@ export function QuickTaskModal({ isOpen, onClose, onTaskCreated }) {
         />
 
         <div>
-          <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-200 mb-1.5">
             Description
           </label>
           <textarea
@@ -109,19 +109,19 @@ export function QuickTaskModal({ isOpen, onClose, onTaskCreated }) {
             placeholder="Add relevant acceptance criteria or notes..."
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 p-3 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full text-sm rounded-xl bg-[#06110C] border border-white/10 p-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#A31C1B] focus:ring-2 focus:ring-[#A31C1B]/25"
           />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-200 mb-1.5">
               Priority
             </label>
             <select
               value={priority}
               onChange={(e) => setPriority(e.target.value)}
-              className="w-full text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full text-sm rounded-xl bg-[#06110C] border border-white/10 px-3 py-2 text-white focus:outline-none focus:border-[#A31C1B] focus:ring-2 focus:ring-[#A31C1B]/25"
             >
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
@@ -131,13 +131,13 @@ export function QuickTaskModal({ isOpen, onClose, onTaskCreated }) {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-200 mb-1.5">
               Status
             </label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full text-sm rounded-xl bg-[#06110C] border border-white/10 px-3 py-2 text-white focus:outline-none focus:border-[#A31C1B] focus:ring-2 focus:ring-[#A31C1B]/25"
             >
               <option value="Backlog">Backlog</option>
               <option value="Todo">Todo</option>
@@ -148,23 +148,30 @@ export function QuickTaskModal({ isOpen, onClose, onTaskCreated }) {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-200 mb-1.5">
               Due Date
             </label>
             <input
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full text-sm rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full text-sm rounded-xl bg-[#06110C] border border-white/10 px-3 py-2 text-white focus:outline-none focus:border-[#A31C1B] focus:ring-2 focus:ring-[#A31C1B]/25"
             />
           </div>
         </div>
 
-        <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100 dark:border-slate-800">
-          <Button variant="secondary" size="sm" onClick={onClose}>
+        <div className="flex justify-end gap-2.5 pt-3 border-t border-white/10">
+          <Button variant="charcoal" size="sm" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" size="sm" loading={loading} disabled={!title.trim() || !projectId}>
+          <Button
+            type="submit"
+            variant="crimson"
+            size="sm"
+            loading={loading}
+            disabled={!title.trim() || !projectId}
+            className="shadow-glow-crimson"
+          >
             Create Task
           </Button>
         </div>

@@ -35,10 +35,10 @@ export function NotificationsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-            <Bell className="w-5 h-5 text-indigo-600" /> Notifications
+          <h1 className="text-xl font-bold text-slate-100 flex items-center gap-2">
+            <Bell className="w-5 h-5 text-[#A31C1B]" /> Notifications
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-400 mt-0.5">
             Real-time updates regarding task assignments, comments, and project invitations.
           </p>
         </div>
@@ -47,7 +47,7 @@ export function NotificationsPage() {
           {unreadCount > 0 && (
             <Button
               size="sm"
-              variant="secondary"
+              variant="crimson"
               icon={CheckCheck}
               onClick={markAllAsRead}
             >
@@ -58,13 +58,13 @@ export function NotificationsPage() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
+      <div className="flex items-center gap-2 border-b border-white/10 pb-2">
         <button
           onClick={() => setFilter('all')}
           className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
             filter === 'all'
-              ? 'bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400'
-              : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+              ? 'bg-[#A31C1B]/15 text-rose-300 border border-[#A31C1B]/30'
+              : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           All ({notifications.length})
@@ -73,8 +73,8 @@ export function NotificationsPage() {
           onClick={() => setFilter('unread')}
           className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
             filter === 'unread'
-              ? 'bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400'
-              : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+              ? 'bg-[#A31C1B]/15 text-rose-300 border border-[#A31C1B]/30'
+              : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           Unread ({unreadCount})
@@ -93,12 +93,12 @@ export function NotificationsPage() {
           }
         />
       ) : (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl overflow-hidden shadow-subtle divide-y divide-slate-100 dark:divide-slate-800">
+        <div className="bg-[#171717] border border-white/10 rounded-2xl overflow-hidden shadow-2xl divide-y divide-white/10">
           {filtered.map((item) => (
             <div
               key={item._id}
               className={`p-4 flex items-start justify-between gap-4 transition-colors ${
-                !item.isRead ? 'bg-indigo-50/30 dark:bg-indigo-950/20' : ''
+                !item.isRead ? 'bg-[#A31C1B]/10' : 'hover:bg-white/5'
               }`}
             >
               <div
@@ -109,14 +109,14 @@ export function NotificationsPage() {
                 }}
               >
                 <div className="flex items-center gap-2">
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100">
+                  <h4 className="text-xs font-bold text-slate-100">
                     {item.title}
                   </h4>
                   {!item.isRead && (
-                    <span className="w-2 h-2 rounded-full bg-indigo-500 inline-block" />
+                    <span className="w-2 h-2 rounded-full bg-[#A31C1B] inline-block shadow-glow-crimson" />
                   )}
                 </div>
-                <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                <p className="text-xs text-slate-300 mt-1 leading-relaxed">
                   {item.message}
                 </p>
                 <div className="text-[10px] text-slate-400 mt-2 flex items-center gap-2">
@@ -129,7 +129,7 @@ export function NotificationsPage() {
                     })}
                   </span>
                   {item.link && (
-                    <span className="text-indigo-600 dark:text-indigo-400 font-medium flex items-center gap-0.5">
+                    <span className="text-rose-400 font-medium flex items-center gap-0.5">
                       Open <ExternalLink className="w-2.5 h-2.5" />
                     </span>
                   )}
@@ -140,7 +140,7 @@ export function NotificationsPage() {
                 {!item.isRead && (
                   <button
                     onClick={() => markAsRead(item._id)}
-                    className="p-1.5 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                    className="p-1.5 text-slate-400 hover:text-rose-300 rounded-lg hover:bg-white/5 transition-colors"
                     title="Mark as read"
                   >
                     <Check className="w-4 h-4" />
@@ -148,7 +148,7 @@ export function NotificationsPage() {
                 )}
                 <button
                   onClick={() => deleteNotification(item._id)}
-                  className="p-1.5 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                  className="p-1.5 text-slate-400 hover:text-[#A31C1B] rounded-lg hover:bg-white/5 transition-colors"
                   title="Delete"
                 >
                   <Trash2 className="w-4 h-4" />

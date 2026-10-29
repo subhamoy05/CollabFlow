@@ -76,12 +76,12 @@ export function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) 
       )}
 
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-40 flex flex-col bg-[#0F172A] border-r border-[#1E293B] text-slate-300 transition-all duration-300 ${
+        className={`fixed top-0 bottom-0 left-0 z-40 flex flex-col bg-[#06110C] border-r border-white/10 text-slate-300 transition-all duration-300 ${
           collapsed ? 'w-20' : 'w-64'
         } ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
       >
         {/* Brand header */}
-        <div className="flex items-center justify-between h-16 px-4 border-b border-[#1E293B]">
+        <div className="flex items-center justify-between h-16 px-4 border-b border-white/10">
           <div
             className="flex items-center gap-3 cursor-pointer overflow-hidden"
             onClick={() => navigate('/app/dashboard')}
@@ -89,30 +89,30 @@ export function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) 
             <img src="/logo.svg" alt="CollabFlow" className="w-8 h-8 rounded-lg flex-shrink-0" />
             {!collapsed && (
               <span className="font-bold text-lg tracking-tight text-white whitespace-nowrap">
-                Collab<span className="text-indigo-400">Flow</span>
+                Collab<span className="text-[#A31C1B]">Flow</span>
               </span>
             )}
           </div>
           <button
             type="button"
             onClick={() => setCollapsed(!collapsed)}
-            className="hidden lg:flex p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="hidden lg:flex p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
           >
             {collapsed ? <ChevronsRight className="w-4 h-4" /> : <ChevronsLeft className="w-4 h-4" />}
           </button>
         </div>
 
         {/* Workspace selector */}
-        <div className="p-3 border-b border-[#1E293B] relative">
+        <div className="p-3 border-b border-white/10 relative">
           <button
             type="button"
             onClick={() => setOrgDropdownOpen(!orgDropdownOpen)}
-            className={`w-full flex items-center justify-between p-2 rounded-lg bg-slate-800/80 hover:bg-slate-800 text-left transition-colors border border-slate-700/60 ${
+            className={`w-full flex items-center justify-between p-2 rounded-xl bg-[#171717] hover:bg-[#202020] text-left transition-colors border border-white/10 ${
               collapsed ? 'justify-center' : ''
             }`}
           >
             <div className="flex items-center gap-2.5 overflow-hidden">
-              <div className="w-7 h-7 rounded-md bg-indigo-600 flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
+              <div className="w-7 h-7 rounded-lg bg-[#A31C1B] flex items-center justify-center text-white font-bold text-xs flex-shrink-0 shadow-sm shadow-[#A31C1B]/40">
                 {currentOrg?.name ? currentOrg.name.charAt(0).toUpperCase() : 'W'}
               </div>
               {!collapsed && (
@@ -131,7 +131,7 @@ export function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) 
 
           {/* Org Dropdown */}
           {orgDropdownOpen && (
-            <div className="absolute left-3 right-3 top-16 z-50 mt-1 bg-[#1E293B] border border-slate-700 rounded-xl shadow-2xl py-1 text-slate-200">
+            <div className="absolute left-3 right-3 top-16 z-50 mt-1 bg-[#171717] border border-white/15 rounded-xl shadow-2xl py-1 text-slate-200 backdrop-blur-xl">
               <div className="px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
                 Workspaces
               </div>
@@ -142,24 +142,24 @@ export function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) 
                     switchOrg(org._id);
                     setOrgDropdownOpen(false);
                   }}
-                  className={`w-full flex items-center justify-between px-3 py-2 text-xs text-left hover:bg-slate-700/70 transition-colors ${
-                    currentOrg?._id === org._id ? 'text-indigo-400 font-semibold bg-slate-800' : ''
+                  className={`w-full flex items-center justify-between px-3 py-2 text-xs text-left hover:bg-white/10 transition-colors ${
+                    currentOrg?._id === org._id ? 'text-[#A31C1B] font-semibold bg-[#A31C1B]/15' : ''
                   }`}
                 >
                   <span className="truncate">{org.name}</span>
                   <span className="text-[10px] text-slate-400 uppercase">{org.userRole}</span>
                 </button>
               ))}
-              <div className="border-t border-slate-700/80 my-1" />
+              <div className="border-t border-white/10 my-1" />
               <button
                 type="button"
                 onClick={() => {
                   setOrgDropdownOpen(false);
                   setCreateOrgModalOpen(true);
                 }}
-                className="w-full flex items-center gap-2 px-3 py-2 text-xs text-indigo-400 hover:text-indigo-300 hover:bg-slate-700/70 transition-colors"
+                className="w-full flex items-center gap-2 px-3 py-2 text-xs text-rose-400 hover:text-rose-300 hover:bg-white/10 transition-colors"
               >
-                <Plus className="w-3.5 h-3.5" />
+                <Plus className="w-3.5 h-3.5 text-[#A31C1B]" />
                 <span>Create Workspace</span>
               </button>
             </div>
@@ -167,7 +167,7 @@ export function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) 
         </div>
 
         {/* Navigation list */}
-        <nav className="flex-1 overflow-y-auto px-2 py-4 space-y-1">
+        <nav className="flex-1 overflow-y-auto px-2.5 py-4 space-y-1.5">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -176,17 +176,17 @@ export function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) 
                 to={item.path}
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${
+                  `flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all duration-200 select-none ${
                     isActive
-                      ? 'bg-indigo-600 text-white shadow-sm'
+                      ? 'bg-gradient-to-r from-[#A31C1B] to-[#721716] text-white shadow-md shadow-[#A31C1B]/35 font-semibold translate-x-0.5'
                       : item.admin
-                      ? 'text-rose-400 hover:bg-rose-950/30 hover:text-rose-300'
-                      : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                      ? 'text-rose-400 hover:bg-[#A31C1B]/15 hover:text-rose-300'
+                      : 'text-slate-400 hover:bg-white/10 hover:text-white hover:translate-x-0.5'
                   } ${collapsed ? 'justify-center px-0' : ''}`
                 }
                 title={collapsed ? item.label : undefined}
               >
-                <Icon className="w-4 h-4 flex-shrink-0" />
+                <Icon className="w-4 h-4 flex-shrink-0 transition-transform duration-200 group-hover:scale-110" />
                 {!collapsed && <span className="truncate">{item.label}</span>}
               </NavLink>
             );
@@ -194,14 +194,14 @@ export function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) 
         </nav>
 
         {/* User Mini Profile in Sidebar Footer */}
-        <div className="p-3 border-t border-[#1E293B]">
+        <div className="p-3 border-t border-white/10">
           <div
-            className={`flex items-center gap-3 p-2 rounded-xl bg-slate-800/40 hover:bg-slate-800/80 transition-colors cursor-pointer ${
+            className={`flex items-center gap-3 p-2 rounded-xl bg-[#171717] hover:bg-[#202020] border border-white/10 transition-colors cursor-pointer ${
               collapsed ? 'justify-center p-1' : ''
             }`}
             onClick={() => navigate('/app/settings')}
           >
-            <div className="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center font-bold text-xs flex-shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#A31C1B]/20 text-rose-300 border border-[#A31C1B]/40 flex items-center justify-center font-bold text-xs flex-shrink-0">
               {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
             </div>
             {!collapsed && (

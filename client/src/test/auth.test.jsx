@@ -23,9 +23,9 @@ function renderWithProviders(ui) {
 describe('Frontend Auth & Landing Flow Tests', () => {
   it('renders landing page with headline and call to action', () => {
     renderWithProviders(<LandingPage />);
-    expect(screen.getByText(/Great Teams Build Better Things/i)).toBeInTheDocument();
-    expect(screen.getByText(/Get Started Free/i)).toBeInTheDocument();
-    expect(screen.getByText(/Real-Time Kanban Boards/i)).toBeInTheDocument();
+    expect(screen.getByText(/ORCHESTRATE SQUADS/i)).toBeInTheDocument();
+    expect(screen.getByText(/Deploy Free Workspace/i)).toBeInTheDocument();
+    expect(screen.getByText(/Real-Time WebSocket Engine/i)).toBeInTheDocument();
   });
 
   it('renders login page with inputs and demo buttons', () => {

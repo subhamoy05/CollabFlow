@@ -55,17 +55,17 @@ export function GlobalSearchModal({ isOpen, onClose }) {
     <Modal isOpen={isOpen} onClose={onClose} maxWidth="max-w-2xl" showClose={false}>
       <div className="-mx-6 -my-5">
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 py-3.5 border-b border-slate-200 dark:border-slate-800">
-          <Search className="w-5 h-5 text-slate-400 mr-3 flex-shrink-0" />
+        <div className="flex items-center px-4 py-3.5 border-b border-white/10">
+          <Search className="w-5 h-5 text-[#A31C1B] mr-3 flex-shrink-0" />
           <input
             type="text"
             placeholder="Search projects, tasks, or members (e.g. CF-1, Kanban, Sarah)..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoFocus
-            className="w-full bg-transparent text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none"
+            className="w-full bg-transparent text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none"
           />
-          <kbd className="px-2 py-0.5 text-[10px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-500 rounded border border-slate-200 dark:border-slate-700">
+          <kbd className="px-2 py-0.5 text-[10px] font-mono bg-[#06110C] text-slate-400 rounded border border-white/10">
             ESC
           </kbd>
         </div>
@@ -100,12 +100,12 @@ export function GlobalSearchModal({ isOpen, onClose }) {
                   <div
                     key={proj._id}
                     onClick={() => handleSelect(`/app/projects/${proj._id}/board`)}
-                    className="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+                    className="flex items-center justify-between p-2.5 rounded-xl hover:bg-white/5 cursor-pointer transition-colors"
                   >
                     <div className="flex items-center gap-3">
                       <div
                         className="w-7 h-7 rounded-lg flex items-center justify-center text-white font-bold text-xs shadow-xs"
-                        style={{ backgroundColor: proj.color || '#6366F1' }}
+                        style={{ backgroundColor: proj.color || '#A31C1B' }}
                       >
                         {proj.key}
                       </div>
@@ -137,10 +137,10 @@ export function GlobalSearchModal({ isOpen, onClose }) {
                     onClick={() =>
                       handleSelect(`/app/projects/${task.project?._id || task.project}/board?task=${task._id}`)
                     }
-                    className="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer transition-colors"
+                    className="flex items-center justify-between p-2.5 rounded-xl hover:bg-white/5 cursor-pointer transition-colors"
                   >
                     <div className="flex items-center gap-3 overflow-hidden">
-                      <span className="font-mono text-xs font-semibold text-indigo-600 dark:text-indigo-400 flex-shrink-0">
+                      <span className="font-mono text-xs font-semibold text-rose-400 flex-shrink-0">
                         {task.key}
                       </span>
                       <span className="text-xs text-slate-800 dark:text-slate-200 truncate">

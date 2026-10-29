@@ -30,46 +30,58 @@ export function Modal({
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
-      {/* Backdrop */}
+      {/* Backdrop with frosted blur */}
       <div
-        className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-[#06110C]/85 backdrop-blur-md transition-opacity duration-300 animate-fade-in"
         onClick={onClose}
+        aria-hidden="true"
       />
 
       <div className="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
         <div
-          className={`relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 text-left shadow-2xl transition-all sm:my-8 w-full ${maxWidth} border border-slate-200 dark:border-slate-800`}
+          role="dialog"
+          aria-modal="true"
+          className={`relative transform overflow-hidden rounded-2xl bg-[#171717] backdrop-blur-xl text-left shadow-2xl transition-all sm:my-8 w-full ${maxWidth} border border-white/10 shadow-glow-crimson animate-scale-in text-slate-100`}
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Subtle top accent gradient */}
+          <div className="h-1 w-full bg-gradient-to-r from-[#A31C1B] via-rose-600 to-amber-500" />
+
           {/* Header */}
           {(title || showClose) && (
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-6 py-4">
+            <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
               <div>
                 {title && (
-                  <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+                  <h3 className="text-base font-semibold text-white flex items-center gap-2">
                     {title}
                   </h3>
                 )}
                 {description && (
-                  <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                  <p className="mt-0.5 text-xs text-slate-400">
                     {description}
                   </p>
                 )}
               </div>
-              {showClose && (
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="rounded-lg p-1.5 text-slate-400 hover:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              )}
+              <div className="flex items-center gap-2">
+                <span className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono text-slate-400 border border-white/10 bg-[#06110C] rounded">
+                  Esc
+                </span>
+                {showClose && (
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    aria-label="Close dialog"
+                    className="rounded-lg p-1.5 text-slate-400 hover:text-white hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A31C1B]"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                )}
+              </div>
             </div>
           )}
 
           {/* Content */}
-          <div className="px-6 py-5">{children}</div>
+          <div className="px-6 py-5 max-h-[calc(100vh-160px)] overflow-y-auto">{children}</div>
         </div>
       </div>
     </div>

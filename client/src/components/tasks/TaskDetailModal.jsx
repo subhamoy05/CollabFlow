@@ -170,33 +170,33 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={onClose} />
+      <div className="fixed inset-0 bg-[#06110C]/85 backdrop-blur-md transition-opacity" onClick={onClose} />
 
       <div className="flex min-h-full items-center justify-center p-3 sm:p-4 text-left">
-        <div className="relative w-full max-w-4xl rounded-2xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col max-h-[90vh]">
+        <div className="relative w-full max-w-4xl rounded-2xl bg-[#171717] shadow-2xl border border-white/10 border-t-2 border-t-[#A31C1B] overflow-hidden flex flex-col max-h-[90vh]">
           {loading ? (
             <div className="py-24 flex justify-center">
               <Spinner size="lg" />
             </div>
           ) : !task ? (
-            <div className="p-8 text-center text-xs text-slate-500">Task details unavailable.</div>
+            <div className="p-8 text-center text-xs text-slate-400">Task details unavailable.</div>
           ) : (
             <>
               {/* Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50">
+              <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#111111]">
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs font-bold text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/60 dark:border-indigo-800">
+                  <span className="font-mono text-xs font-bold text-rose-300 px-2 py-0.5 rounded bg-[#A31C1B]/20 border border-[#A31C1B]/40">
                     {task.key}
                   </span>
                   <span className="text-xs text-slate-400">
-                    in project <strong className="text-slate-700 dark:text-slate-300">{task.project?.title}</strong>
+                    in project <strong className="text-slate-200">{task.project?.title}</strong>
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
                     onClick={handleDeleteTask}
-                    className="p-1.5 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    className="p-1.5 text-slate-400 hover:text-[#A31C1B] rounded-lg hover:bg-white/5 transition-colors"
                     title="Delete task"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -204,7 +204,7 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                   <button
                     type="button"
                     onClick={onClose}
-                    className="p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-white/5 transition-colors"
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -222,13 +222,13 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                       value={task.title}
                       onChange={(e) => setTask({ ...task, title: e.target.value })}
                       onBlur={(e) => handleFieldChange('title', e.target.value)}
-                      className="w-full text-lg font-bold text-slate-900 dark:text-slate-100 bg-transparent border-0 border-b border-transparent hover:border-slate-300 focus:border-indigo-500 focus:outline-none transition-colors pb-1"
+                      className="w-full text-lg font-bold text-slate-100 bg-transparent border-0 border-b border-transparent hover:border-white/20 focus:border-[#A31C1B] focus:outline-none transition-colors pb-1"
                     />
                   </div>
 
                   {/* Task Description Editable */}
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
                       Description
                     </label>
                     <textarea
@@ -237,15 +237,15 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                       value={task.description || ''}
                       onChange={(e) => setTask({ ...task, description: e.target.value })}
                       onBlur={(e) => handleFieldChange('description', e.target.value)}
-                      className="w-full text-xs rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 p-3 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                      className="w-full text-xs rounded-xl bg-[#06110C] border border-white/10 p-3 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#A31C1B] focus:border-[#A31C1B]"
                     />
                   </div>
 
                   {/* Checklist Section */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
-                        <CheckSquare className="w-4 h-4 text-indigo-600" />
+                      <h4 className="text-xs font-bold text-slate-100 flex items-center gap-1.5">
+                        <CheckSquare className="w-4 h-4 text-[#A31C1B]" />
                         <span>Checklist</span>
                       </h4>
                       {task.checklist?.length > 0 && (
@@ -259,18 +259,18 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                       {task.checklist?.map((item) => (
                         <div
                           key={item._id}
-                          className="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 text-xs"
+                          className="flex items-center justify-between p-2 rounded-lg bg-[#06110C] border border-white/10 text-xs"
                         >
                           <label className="flex items-center gap-2 cursor-pointer flex-1">
                             <input
                               type="checkbox"
                               checked={item.completed}
                               onChange={() => handleToggleChecklist(item._id)}
-                              className="rounded text-indigo-600 focus:ring-indigo-500"
+                              className="rounded text-[#A31C1B] accent-[#A31C1B] focus:ring-[#A31C1B]"
                             />
                             <span
                               className={`${
-                                item.completed ? 'line-through text-slate-400' : 'text-slate-800 dark:text-slate-200'
+                                item.completed ? 'line-through text-slate-500' : 'text-slate-200'
                               }`}
                             >
                               {item.text}
@@ -279,7 +279,7 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                           <button
                             type="button"
                             onClick={() => handleRemoveChecklistItem(item._id)}
-                            className="text-slate-400 hover:text-rose-500 p-1"
+                            className="text-slate-500 hover:text-[#A31C1B] p-1 transition-colors"
                           >
                             <Trash2 className="w-3 h-3" />
                           </button>
@@ -293,9 +293,9 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                         placeholder="Add checklist item..."
                         value={newChecklistText}
                         onChange={(e) => setNewChecklistText(e.target.value)}
-                        className="flex-1 text-xs rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-3 py-1.5 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                        className="flex-1 text-xs rounded-lg bg-[#06110C] border border-white/10 px-3 py-1.5 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#A31C1B]"
                       />
-                      <Button type="submit" size="xs" disabled={!newChecklistText.trim()}>
+                      <Button type="submit" size="xs" variant="crimson" disabled={!newChecklistText.trim()}>
                         Add
                       </Button>
                     </form>
@@ -304,11 +304,11 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                   {/* Attachments Section */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
-                        <Paperclip className="w-4 h-4 text-indigo-600" />
+                      <h4 className="text-xs font-bold text-slate-100 flex items-center gap-1.5">
+                        <Paperclip className="w-4 h-4 text-[#A31C1B]" />
                         <span>Attachments</span>
                       </h4>
-                      <label className="cursor-pointer text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1">
+                      <label className="cursor-pointer text-xs font-medium text-rose-400 hover:text-rose-300 hover:underline flex items-center gap-1 transition-colors">
                         <Upload className="w-3.5 h-3.5" />
                         <span>{uploadingFile ? 'Uploading...' : 'Upload File'}</span>
                         <input
@@ -321,26 +321,26 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                     </div>
 
                     {task.attachments?.length === 0 ? (
-                      <p className="text-xs text-slate-400 italic">No files attached yet.</p>
+                      <p className="text-xs text-slate-500 italic">No files attached yet.</p>
                     ) : (
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {task.attachments?.map((att) => (
                           <div
                             key={att._id}
-                            className="flex items-center justify-between p-2.5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-xs"
+                            className="flex items-center justify-between p-2.5 rounded-xl border border-white/10 bg-[#06110C] text-xs"
                           >
                             <div className="truncate mr-2">
-                              <div className="font-semibold text-slate-800 dark:text-slate-200 truncate">
+                              <div className="font-semibold text-slate-200 truncate">
                                 {att.originalName}
                               </div>
-                              <span className="text-[10px] text-slate-400">
+                              <span className="text-[10px] text-slate-500">
                                 {(att.fileSize / 1024).toFixed(1)} KB
                               </span>
                             </div>
                             <a
                               href={`/api/v1/files/${att._id}/download`}
                               download={att.originalName}
-                              className="p-1.5 text-slate-500 hover:text-indigo-600 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800"
+                              className="p-1.5 text-slate-400 hover:text-rose-300 rounded-lg hover:bg-white/5 transition-colors"
                               title="Download attachment"
                             >
                               <Download className="w-4 h-4" />
@@ -352,25 +352,25 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                   </div>
 
                   {/* Comments Feed */}
-                  <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
-                    <h4 className="text-xs font-bold text-slate-900 dark:text-slate-100 mb-3 flex items-center gap-1.5">
-                      <MessageSquare className="w-4 h-4 text-indigo-600" />
+                  <div className="pt-4 border-t border-white/10">
+                    <h4 className="text-xs font-bold text-slate-100 mb-3 flex items-center gap-1.5">
+                      <MessageSquare className="w-4 h-4 text-[#A31C1B]" />
                       <span>Comments & Activity</span>
                     </h4>
 
                     <div className="space-y-3 mb-4 max-h-60 overflow-y-auto">
                       {task.comments?.length === 0 ? (
-                        <p className="text-xs text-slate-400 italic">No comments yet. Start the conversation!</p>
+                        <p className="text-xs text-slate-500 italic">No comments yet. Start the conversation!</p>
                       ) : (
                         task.comments?.map((c) => (
                           <div key={c._id} className="flex items-start gap-2.5 text-xs">
                             <Avatar user={c.author} size="sm" />
-                            <div className="flex-1 bg-slate-50 dark:bg-slate-950 p-3 rounded-xl border border-slate-200/70 dark:border-slate-800">
+                            <div className="flex-1 bg-[#06110C] p-3 rounded-xl border border-white/10">
                               <div className="flex items-center justify-between mb-1">
-                                <span className="font-semibold text-slate-900 dark:text-slate-100">
+                                <span className="font-semibold text-slate-100">
                                   {c.author?.name}
                                 </span>
-                                <span className="text-[10px] text-slate-400">
+                                <span className="text-[10px] text-slate-500">
                                   {new Date(c.createdAt).toLocaleDateString([], {
                                     month: 'short',
                                     day: 'numeric',
@@ -379,7 +379,7 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                                   })}
                                 </span>
                               </div>
-                              <p className="text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">
+                              <p className="text-slate-300 leading-relaxed whitespace-pre-wrap">
                                 {c.content}
                               </p>
                             </div>
@@ -394,11 +394,12 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                         placeholder="Write a comment..."
                         value={newComment}
                         onChange={(e) => setNewComment(e.target.value)}
-                        className="flex-1 text-xs rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-3.5 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                        className="flex-1 text-xs rounded-xl bg-[#06110C] border border-white/10 px-3.5 py-2 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#A31C1B]"
                       />
                       <Button
                         type="submit"
                         size="sm"
+                        variant="crimson"
                         icon={Send}
                         loading={submittingComment}
                         disabled={!newComment.trim()}
@@ -410,59 +411,59 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                 </div>
 
                 {/* Right 1 Col: Status, Priority, Assignee, Dates, Sprints Meta */}
-                <div className="space-y-4 bg-slate-50/70 dark:bg-slate-950/70 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 text-xs">
+                <div className="space-y-4 bg-[#111111] p-4 rounded-xl border border-white/10 text-xs">
                   <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">
                     Attributes
                   </div>
 
                   {/* Status Selector */}
                   <div>
-                    <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
+                    <label className="block text-[11px] font-semibold text-slate-300 mb-1">
                       Status
                     </label>
                     <select
                       value={task.status}
                       onChange={(e) => handleFieldChange('status', e.target.value)}
-                      className="w-full text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 px-2.5 py-1.5 text-slate-900 dark:text-slate-100"
+                      className="w-full text-xs rounded-lg bg-[#171717] border border-white/10 px-2.5 py-1.5 text-slate-100 focus:ring-1 focus:ring-[#A31C1B]"
                     >
-                      <option value="Backlog">Backlog</option>
-                      <option value="Todo">Todo</option>
-                      <option value="In Progress">In Progress</option>
-                      <option value="In Review">In Review</option>
-                      <option value="Done">Done</option>
+                      <option value="Backlog" className="bg-[#171717]">Backlog</option>
+                      <option value="Todo" className="bg-[#171717]">Todo</option>
+                      <option value="In Progress" className="bg-[#171717]">In Progress</option>
+                      <option value="In Review" className="bg-[#171717]">In Review</option>
+                      <option value="Done" className="bg-[#171717]">Done</option>
                     </select>
                   </div>
 
                   {/* Priority Selector */}
                   <div>
-                    <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
+                    <label className="block text-[11px] font-semibold text-slate-300 mb-1">
                       Priority
                     </label>
                     <select
                       value={task.priority}
                       onChange={(e) => handleFieldChange('priority', e.target.value)}
-                      className="w-full text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 px-2.5 py-1.5 text-slate-900 dark:text-slate-100"
+                      className="w-full text-xs rounded-lg bg-[#171717] border border-white/10 px-2.5 py-1.5 text-slate-100 focus:ring-1 focus:ring-[#A31C1B]"
                     >
-                      <option value="Low">Low</option>
-                      <option value="Medium">Medium</option>
-                      <option value="High">High</option>
-                      <option value="Urgent">Urgent</option>
+                      <option value="Low" className="bg-[#171717]">Low</option>
+                      <option value="Medium" className="bg-[#171717]">Medium</option>
+                      <option value="High" className="bg-[#171717]">High</option>
+                      <option value="Urgent" className="bg-[#171717]">Urgent</option>
                     </select>
                   </div>
 
                   {/* Assignee Selector */}
                   <div>
-                    <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
+                    <label className="block text-[11px] font-semibold text-slate-300 mb-1">
                       Assignee
                     </label>
                     <select
                       value={task.assignee?._id || task.assignee || ''}
                       onChange={(e) => handleFieldChange('assignee', e.target.value || null)}
-                      className="w-full text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 px-2.5 py-1.5 text-slate-900 dark:text-slate-100"
+                      className="w-full text-xs rounded-lg bg-[#171717] border border-white/10 px-2.5 py-1.5 text-slate-100 focus:ring-1 focus:ring-[#A31C1B]"
                     >
-                      <option value="">Unassigned</option>
+                      <option value="" className="bg-[#171717]">Unassigned</option>
                       {members.map((m) => (
-                        <option key={m.user?._id || m.id} value={m.user?._id || m.id}>
+                        <option key={m.user?._id || m.id} value={m.user?._id || m.id} className="bg-[#171717]">
                           {m.user?.name} ({m.role})
                         </option>
                       ))}
@@ -471,7 +472,7 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
 
                   {/* Due Date */}
                   <div>
-                    <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
+                    <label className="block text-[11px] font-semibold text-slate-300 mb-1">
                       Due Date
                     </label>
                     <input
@@ -483,13 +484,13 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                           e.target.value ? new Date(e.target.value).toISOString() : null
                         )
                       }
-                      className="w-full text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 px-2.5 py-1.5 text-slate-900 dark:text-slate-100"
+                      className="w-full text-xs rounded-lg bg-[#171717] border border-white/10 px-2.5 py-1.5 text-slate-100 focus:ring-1 focus:ring-[#A31C1B]"
                     />
                   </div>
 
                   {/* Effort */}
                   <div>
-                    <label className="block text-[11px] font-semibold text-slate-600 dark:text-slate-400 mb-1">
+                    <label className="block text-[11px] font-semibold text-slate-300 mb-1">
                       Estimated Effort (Hours)
                     </label>
                     <input
@@ -498,20 +499,20 @@ export function TaskDetailModal({ taskId, isOpen, onClose, onTaskUpdated, onTask
                       max="1000"
                       value={task.estimatedEffort || 0}
                       onChange={(e) => handleFieldChange('estimatedEffort', parseFloat(e.target.value) || 0)}
-                      className="w-full text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 px-2.5 py-1.5 text-slate-900 dark:text-slate-100"
+                      className="w-full text-xs rounded-lg bg-[#171717] border border-white/10 px-2.5 py-1.5 text-slate-100 focus:ring-1 focus:ring-[#A31C1B]"
                     />
                   </div>
 
                   {/* Creator and Metadata */}
-                  <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-1.5 text-[11px] text-slate-400">
+                  <div className="pt-3 border-t border-white/10 space-y-1.5 text-[11px] text-slate-400">
                     <div>
-                      Created by <strong className="text-slate-600 dark:text-slate-300">{task.creator?.name}</strong>
+                      Created by <strong className="text-slate-200">{task.creator?.name}</strong>
                     </div>
                     <div>
                       Created {new Date(task.createdAt).toLocaleDateString()}
                     </div>
                     {task.completedAt && (
-                      <div className="text-emerald-500">
+                      <div className="text-emerald-400">
                         Completed {new Date(task.completedAt).toLocaleDateString()}
                       </div>
                     )}

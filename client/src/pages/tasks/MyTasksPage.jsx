@@ -47,13 +47,13 @@ export function MyTasksPage() {
   }, [statusFilter, priorityFilter, search]);
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto">
+    <div className="space-y-6 max-w-7xl mx-auto text-slate-100">
       {/* Header */}
       <div>
-        <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-          <CheckSquare className="w-5 h-5 text-indigo-600" /> My Tasks
+        <h1 className="text-xl font-bold text-white flex items-center gap-2">
+          <CheckSquare className="w-5 h-5 text-[#A31C1B]" /> My Tasks
         </h1>
-        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+        <p className="text-xs text-slate-400 mt-0.5">
           Work items assigned to you across all authorized project workspaces.
         </p>
       </div>
@@ -67,14 +67,14 @@ export function MyTasksPage() {
             placeholder="Search your assigned tasks..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-3.5 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full pl-9 pr-3.5 py-2 text-xs rounded-xl bg-[#171717] border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#A31C1B] focus:ring-2 focus:ring-[#A31C1B]/20"
           />
         </div>
         <div className="flex items-center gap-2">
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="text-xs rounded-xl bg-[#171717] border border-white/10 px-3 py-2 text-white focus:outline-none focus:border-[#A31C1B] focus:ring-2 focus:ring-[#A31C1B]/20"
           >
             <option value="all">All Statuses</option>
             <option value="Backlog">Backlog</option>
@@ -87,7 +87,7 @@ export function MyTasksPage() {
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
-            className="text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="text-xs rounded-xl bg-[#171717] border border-white/10 px-3 py-2 text-white focus:outline-none focus:border-[#A31C1B] focus:ring-2 focus:ring-[#A31C1B]/20"
           >
             <option value="all">All Priorities</option>
             <option value="Urgent">Urgent</option>
@@ -110,7 +110,7 @@ export function MyTasksPage() {
           description="You don't have any matching assigned tasks at the moment."
         />
       ) : (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl overflow-hidden shadow-subtle divide-y divide-slate-100 dark:divide-slate-800">
+        <div className="bg-[#171717] border border-white/10 rounded-2xl overflow-hidden shadow-2xl divide-y divide-white/10">
           {tasks.map((task) => {
             const isOverdue =
               task.dueDate && new Date() > new Date(task.dueDate) && task.status !== 'Done';
@@ -118,14 +118,14 @@ export function MyTasksPage() {
               <div
                 key={task._id}
                 onClick={() => setSelectedTaskId(task._id)}
-                className="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer transition-colors"
+                className="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 hover:bg-white/5 cursor-pointer transition-colors"
               >
                 <div className="flex items-center gap-3 overflow-hidden">
-                  <span className="font-mono text-xs font-bold text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200/60 dark:border-indigo-800 flex-shrink-0">
+                  <span className="font-mono text-xs font-bold text-rose-400 px-2.5 py-0.5 rounded-lg bg-[#06110C] border border-[#A31C1B]/40 flex-shrink-0">
                     {task.key}
                   </span>
                   <div className="overflow-hidden">
-                    <div className="text-xs font-semibold text-slate-900 dark:text-slate-100 truncate">
+                    <div className="text-xs font-semibold text-white truncate">
                       {task.title}
                     </div>
                     <div className="flex items-center gap-2 text-[10px] text-slate-400 mt-0.5">
@@ -133,7 +133,7 @@ export function MyTasksPage() {
                       {task.dueDate && (
                         <>
                           <span>•</span>
-                          <span className={`flex items-center gap-1 ${isOverdue ? 'text-rose-500 font-bold' : ''}`}>
+                          <span className={`flex items-center gap-1 ${isOverdue ? 'text-rose-400 font-bold' : ''}`}>
                             <Clock className="w-3 h-3" />
                             Due {new Date(task.dueDate).toLocaleDateString()}
                           </span>

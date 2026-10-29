@@ -122,10 +122,10 @@ export function CalendarPage() {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-            <CalendarIcon className="w-5 h-5 text-indigo-600" /> Calendar
+          <h1 className="text-xl font-bold text-slate-100 flex items-center gap-2">
+            <CalendarIcon className="w-5 h-5 text-[#A31C1B]" /> Calendar
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+          <p className="text-xs text-slate-400 mt-0.5">
             Deliverable deadlines, release dates, and project milestones.
           </p>
         </div>
@@ -134,11 +134,11 @@ export function CalendarPage() {
           <select
             value={selectedProjectId}
             onChange={(e) => setSelectedProjectId(e.target.value)}
-            className="text-xs rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-3 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="text-xs rounded-xl bg-[#171717] border border-white/10 px-3 py-2 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#A31C1B] focus:border-[#A31C1B]"
           >
-            <option value="all">All Projects</option>
+            <option value="all" className="bg-[#171717] text-slate-100">All Projects</option>
             {projects.map((p) => (
-              <option key={p._id} value={p._id}>
+              <option key={p._id} value={p._id} className="bg-[#171717] text-slate-100">
                 {p.title}
               </option>
             ))}
@@ -151,13 +151,13 @@ export function CalendarPage() {
           <div className="flex items-center gap-1">
             <button
               onClick={handlePrevMonth}
-              className="p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300"
+              className="p-2 rounded-lg bg-[#171717] border border-white/10 hover:bg-[#252525] text-slate-300 transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={handleNextMonth}
-              className="p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300"
+              className="p-2 rounded-lg bg-[#171717] border border-white/10 hover:bg-[#252525] text-slate-300 transition-colors"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -166,14 +166,14 @@ export function CalendarPage() {
       </div>
 
       {/* Month Label */}
-      <div className="text-base font-bold text-slate-800 dark:text-slate-200">
+      <div className="text-base font-bold text-slate-100">
         {monthNames[month]} {year}
       </div>
 
       {/* Calendar Grid */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl overflow-hidden shadow-subtle">
+      <div className="bg-[#171717] border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
         {/* Days of week header */}
-        <div className="grid grid-cols-7 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50 text-center py-2.5 text-xs font-semibold text-slate-500 dark:text-slate-400">
+        <div className="grid grid-cols-7 border-b border-white/10 bg-[#121212] text-center py-2.5 text-xs font-semibold text-slate-400">
           <div>Sun</div>
           <div>Mon</div>
           <div>Tue</div>
@@ -184,7 +184,7 @@ export function CalendarPage() {
         </div>
 
         {/* Days grid */}
-        <div className="grid grid-cols-7 auto-rows-fr divide-x divide-y divide-slate-100 dark:divide-slate-800/80">
+        <div className="grid grid-cols-7 auto-rows-fr divide-x divide-y divide-white/10">
           {calendarDays.map((cell, idx) => {
             const dayEvents = getDayEvents(cell.date);
             const isCurrentDay = isToday(cell.date);
@@ -194,8 +194,8 @@ export function CalendarPage() {
                 key={idx}
                 className={`min-h-[110px] p-2 flex flex-col justify-between transition-colors ${
                   !cell.isCurrentMonth
-                    ? 'bg-slate-50/40 dark:bg-slate-950/20 opacity-50'
-                    : 'bg-white dark:bg-slate-900'
+                    ? 'bg-[#06110C]/60 opacity-40'
+                    : 'bg-[#171717] hover:bg-[#1c1c1c]'
                 }`}
               >
                 {/* Day number */}
@@ -203,8 +203,8 @@ export function CalendarPage() {
                   <span
                     className={`text-xs font-semibold rounded-full w-6 h-6 flex items-center justify-center ${
                       isCurrentDay
-                        ? 'bg-indigo-600 text-white font-bold'
-                        : 'text-slate-700 dark:text-slate-300'
+                        ? 'bg-[#A31C1B] text-white font-bold shadow-glow-crimson'
+                        : 'text-slate-300'
                     }`}
                   >
                     {cell.day}
@@ -219,7 +219,7 @@ export function CalendarPage() {
                       onClick={() => {
                         if (evt.taskId) setSelectedTaskId(evt.taskId);
                       }}
-                      className="px-2 py-1 rounded text-[10px] font-medium truncate cursor-pointer transition-transform hover:scale-102 flex items-center gap-1.5 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/60 dark:border-indigo-800"
+                      className="px-2 py-1 rounded text-[10px] font-medium truncate cursor-pointer transition-all hover:scale-102 flex items-center gap-1.5 bg-[#06110C] hover:bg-[#202020] text-slate-200 border border-white/10 hover:border-[#A31C1B]/50"
                       title={evt.title}
                     >
                       <span
@@ -227,10 +227,10 @@ export function CalendarPage() {
                         style={{
                           backgroundColor:
                             evt.priority === 'Urgent'
-                              ? '#F43F5E'
+                              ? '#A31C1B'
                               : evt.priority === 'High'
                               ? '#F59E0B'
-                              : '#6366F1'
+                              : '#A31C1B'
                         }}
                       />
                       <span className="truncate">{evt.title}</span>

@@ -205,11 +205,11 @@ export function ChatPage() {
   const typingNames = Array.from(typingUsers.values());
 
   return (
-    <div className="h-[calc(100vh-7rem)] flex rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 overflow-hidden shadow-subtle">
+    <div className="h-[calc(100vh-7rem)] flex rounded-2xl bg-[#171717] border border-white/10 overflow-hidden shadow-2xl">
       {/* Channels/Projects List (Left Sidebar) */}
-      <div className="w-64 border-r border-slate-200 dark:border-slate-800 flex flex-col bg-slate-50/50 dark:bg-slate-950/40">
-        <div className="p-3.5 border-b border-slate-200 dark:border-slate-800">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+      <div className="w-64 border-r border-white/10 flex flex-col bg-[#121212]">
+        <div className="p-3.5 border-b border-white/10">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-400">
             Project Channels
           </h2>
         </div>
@@ -220,7 +220,7 @@ export function ChatPage() {
               <Spinner size="sm" />
             </div>
           ) : projects.length === 0 ? (
-            <div className="p-4 text-center text-xs text-slate-400">No projects found.</div>
+            <div className="p-4 text-center text-xs text-slate-500">No projects found.</div>
           ) : (
             projects.map((proj) => (
               <button
@@ -232,18 +232,18 @@ export function ChatPage() {
                 }}
                 className={`w-full flex items-center justify-between p-2 rounded-xl text-left text-xs transition-colors ${
                   selectedProjectId === proj._id
-                    ? 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-semibold'
-                    : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
+                    ? 'bg-[#A31C1B]/15 text-rose-300 border border-[#A31C1B]/30 font-semibold'
+                    : 'text-slate-300 hover:bg-white/5'
                 }`}
               >
                 <div className="flex items-center gap-2 truncate">
                   <span
                     className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: proj.color || '#6366F1' }}
+                    style={{ backgroundColor: proj.color || '#A31C1B' }}
                   />
                   <span className="truncate">{proj.title}</span>
                 </div>
-                <span className="text-[10px] font-mono text-slate-400 uppercase">{proj.key}</span>
+                <span className="text-[10px] font-mono text-slate-500 uppercase">{proj.key}</span>
               </button>
             ))
           )}
@@ -251,19 +251,19 @@ export function ChatPage() {
       </div>
 
       {/* Chat Messages and Input Area */}
-      <div className="flex-1 flex flex-col min-w-0 bg-white dark:bg-slate-900">
+      <div className="flex-1 flex flex-col min-w-0 bg-[#171717]">
         {/* Chat Header */}
-        <div className="h-14 border-b border-slate-200/80 dark:border-slate-800 px-5 flex items-center justify-between bg-slate-50/30 dark:bg-slate-950/20">
+        <div className="h-14 border-b border-white/10 px-5 flex items-center justify-between bg-[#121212]">
           <div className="flex items-center gap-2.5">
-            <MessageSquare className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-            <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">
+            <MessageSquare className="w-4 h-4 text-[#A31C1B]" />
+            <h3 className="text-sm font-bold text-slate-100 truncate">
               {selectedProject?.title || 'Select a Channel'}
             </h3>
           </div>
           <div className="flex items-center gap-2">
             <Button
               size="xs"
-              variant="outline"
+              variant="secondary"
               onClick={() => navigate(`/app/projects/${selectedProjectId}/board`)}
             >
               Open Board
@@ -278,7 +278,7 @@ export function ChatPage() {
               <Spinner size="md" />
             </div>
           ) : messages.length === 0 ? (
-            <div className="py-20 text-center text-xs text-slate-400">
+            <div className="py-20 text-center text-xs text-slate-500">
               No messages in this channel yet. Say hello to kick off team collaboration!
             </div>
           ) : (
@@ -297,25 +297,25 @@ export function ChatPage() {
                   <div className="flex-1 overflow-hidden">
                     {/* Sender & timestamp */}
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="font-semibold text-slate-900 dark:text-slate-100">
+                      <span className="font-semibold text-slate-100">
                         {msg.sender?.name || 'Teammate'}
                       </span>
-                      <span className="text-[10px] text-slate-400">
+                      <span className="text-[10px] text-slate-500">
                         {new Date(msg.createdAt).toLocaleTimeString([], {
                           hour: '2-digit',
                           minute: '2-digit'
                         })}
                       </span>
                       {msg.isEdited && (
-                        <span className="text-[10px] text-slate-400 italic">(edited)</span>
+                        <span className="text-[10px] text-slate-500 italic">(edited)</span>
                       )}
                     </div>
 
                     {/* Reply quote preview */}
                     {msg.replyTo && (
-                      <div className="mb-1.5 pl-2 border-l-2 border-indigo-400 text-[11px] text-slate-500 dark:text-slate-400 line-clamp-1 flex items-center gap-1">
-                        <CornerDownRight className="w-3 h-3 text-indigo-400" />
-                        <strong className="text-slate-700 dark:text-slate-300">
+                      <div className="mb-1.5 pl-2 border-l-2 border-[#A31C1B] text-[11px] text-slate-400 line-clamp-1 flex items-center gap-1">
+                        <CornerDownRight className="w-3 h-3 text-[#A31C1B]" />
+                        <strong className="text-slate-200">
                           {msg.replyTo.sender?.name}:
                         </strong>{' '}
                         {msg.replyTo.content}
@@ -330,23 +330,23 @@ export function ChatPage() {
                           value={editText}
                           onChange={(e) => setEditText(e.target.value)}
                           autoFocus
-                          className="flex-1 text-xs rounded-lg bg-slate-50 dark:bg-slate-950 border border-indigo-500 px-3 py-1.5 text-slate-900 dark:text-slate-100"
+                          className="flex-1 text-xs rounded-lg bg-[#06110C] border border-[#A31C1B] px-3 py-1.5 text-slate-100 focus:outline-none"
                         />
                         <button
                           onClick={() => handleSaveEdit(msg._id)}
-                          className="p-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+                          className="p-1.5 bg-[#A31C1B] text-white rounded-lg hover:bg-[#851615] transition-colors"
                         >
                           <Check className="w-3.5 h-3.5" />
                         </button>
                         <button
                           onClick={() => setEditingMessageId(null)}
-                          className="p-1.5 text-slate-400 hover:text-slate-600"
+                          className="p-1.5 text-slate-400 hover:text-slate-200"
                         >
                           <X className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     ) : (
-                      <p className="text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-wrap break-words">
+                      <p className="text-slate-200 leading-relaxed whitespace-pre-wrap break-words">
                         {msg.content}
                       </p>
                     )}
@@ -357,7 +357,7 @@ export function ChatPage() {
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
                       <button
                         onClick={() => setReplyTo(msg)}
-                        className="p-1 text-slate-400 hover:text-indigo-600"
+                        className="p-1 text-slate-400 hover:text-rose-400"
                         title="Reply"
                       >
                         <CornerDownRight className="w-3.5 h-3.5" />
@@ -369,14 +369,14 @@ export function ChatPage() {
                               setEditingMessageId(msg._id);
                               setEditText(msg.content);
                             }}
-                            className="p-1 text-slate-400 hover:text-indigo-600"
+                            className="p-1 text-slate-400 hover:text-rose-400"
                             title="Edit"
                           >
                             <Edit2 className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => handleDeleteMessage(msg._id)}
-                            className="p-1 text-slate-400 hover:text-rose-600"
+                            className="p-1 text-slate-400 hover:text-[#A31C1B]"
                             title="Delete"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -393,7 +393,7 @@ export function ChatPage() {
           {/* Typing Indicator */}
           {typingNames.length > 0 && (
             <div className="text-[11px] text-slate-400 italic flex items-center gap-1.5 animate-pulse">
-              <span className="w-2 h-2 rounded-full bg-indigo-500 animate-ping inline-block" />
+              <span className="w-2 h-2 rounded-full bg-[#A31C1B] animate-ping inline-block" />
               <span>
                 {typingNames.join(', ')} {typingNames.length === 1 ? 'is' : 'are'} typing...
               </span>
@@ -404,24 +404,24 @@ export function ChatPage() {
         </div>
 
         {/* Message Input Form */}
-        <div className="p-4 border-t border-slate-200/80 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-950/20">
+        <div className="p-4 border-t border-white/10 bg-[#121212]">
           {/* Active Reply Banner */}
           {replyTo && (
-            <div className="flex items-center justify-between bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 px-3 py-1.5 rounded-lg mb-2 text-xs">
+            <div className="flex items-center justify-between bg-[#A31C1B]/15 border border-[#A31C1B]/30 px-3 py-1.5 rounded-lg mb-2 text-xs">
               <div className="flex items-center gap-1.5 truncate">
-                <CornerDownRight className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 flex-shrink-0" />
-                <span className="text-slate-500">Replying to</span>
-                <strong className="text-slate-800 dark:text-slate-200">
+                <CornerDownRight className="w-3.5 h-3.5 text-rose-400 flex-shrink-0" />
+                <span className="text-slate-400">Replying to</span>
+                <strong className="text-slate-200">
                   {replyTo.sender?.name}:
                 </strong>
-                <span className="text-slate-600 dark:text-slate-400 truncate">
+                <span className="text-slate-300 truncate">
                   {replyTo.content}
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => setReplyTo(null)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 ml-2"
+                className="text-slate-400 hover:text-white ml-2"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -434,11 +434,12 @@ export function ChatPage() {
               placeholder={`Message #${selectedProject?.key || 'channel'}...`}
               value={newMessage}
               onChange={handleInputChange}
-              className="flex-1 text-xs rounded-xl bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700 px-4 py-2.5 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="flex-1 text-xs rounded-xl bg-[#06110C] border border-white/10 px-4 py-2.5 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-[#A31C1B] focus:border-[#A31C1B]"
             />
             <Button
               type="submit"
               size="md"
+              variant="crimson"
               icon={Send}
               disabled={!newMessage.trim() || !selectedProjectId}
             >

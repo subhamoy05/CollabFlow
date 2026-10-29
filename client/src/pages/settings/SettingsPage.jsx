@@ -77,22 +77,22 @@ export function SettingsPage() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       <div>
-        <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-          <Settings className="w-5 h-5 text-indigo-600" /> Account & Workspace Settings
+        <h1 className="text-xl font-bold text-slate-100 flex items-center gap-2">
+          <Settings className="w-5 h-5 text-[#A31C1B]" /> Account & Workspace Settings
         </h1>
-        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+        <p className="text-xs text-slate-400 mt-0.5">
           Manage your personal identity, theme appearance, and workspace collaborators.
         </p>
       </div>
 
       {/* Profile Card */}
       <Card className="p-6">
-        <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-2">
-          <User className="w-4 h-4 text-indigo-600" /> Profile Information
+        <h3 className="text-sm font-bold text-slate-100 mb-4 flex items-center gap-2">
+          <User className="w-4 h-4 text-[#A31C1B]" /> Profile Information
         </h3>
 
         {profileMsg && (
-          <div className="mb-4 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs border border-emerald-200 dark:border-emerald-800">
+          <div className="mb-4 p-3 rounded-xl bg-emerald-950/40 text-emerald-300 text-xs border border-emerald-800">
             {profileMsg}
           </div>
         )}
@@ -101,7 +101,7 @@ export function SettingsPage() {
           <div className="flex items-center gap-4 mb-2">
             <Avatar user={{ ...user, avatarUrl }} size="lg" />
             <div className="text-xs">
-              <div className="font-semibold text-slate-900 dark:text-slate-100">{user?.name}</div>
+              <div className="font-semibold text-slate-100">{user?.name}</div>
               <div className="text-slate-400">{user?.email}</div>
               <Badge size="xs" className="mt-1">{user?.role}</Badge>
             </div>
@@ -123,7 +123,7 @@ export function SettingsPage() {
           </div>
 
           <div className="flex justify-end pt-2">
-            <Button type="submit" size="sm" loading={savingProfile}>
+            <Button type="submit" variant="crimson" size="sm" loading={savingProfile}>
               Save Profile
             </Button>
           </div>
@@ -132,10 +132,10 @@ export function SettingsPage() {
 
       {/* Theme Appearance Card */}
       <Card className="p-6">
-        <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-2">
-          <Palette className="w-4 h-4 text-indigo-600" /> Interface Theme
+        <h3 className="text-sm font-bold text-slate-100 mb-2 flex items-center gap-2">
+          <Palette className="w-4 h-4 text-[#A31C1B]" /> Interface Theme
         </h3>
-        <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+        <p className="text-xs text-slate-400 mb-4">
           Select your preferred visual style. Your choice is automatically persisted in your browser.
         </p>
 
@@ -145,8 +145,8 @@ export function SettingsPage() {
             onClick={() => setTheme('light')}
             className={`p-3 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors ${
               theme === 'light'
-                ? 'bg-indigo-50 dark:bg-indigo-950 border-indigo-600 text-indigo-600'
-                : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50'
+                ? 'bg-[#A31C1B]/15 border-[#A31C1B] text-rose-300 shadow-glow-crimson'
+                : 'border-white/10 text-slate-300 hover:bg-white/5'
             }`}
           >
             <span>☀️ Light Mode</span>
@@ -158,8 +158,8 @@ export function SettingsPage() {
             onClick={() => setTheme('dark')}
             className={`p-3 rounded-xl border text-xs font-semibold flex items-center justify-between transition-colors ${
               theme === 'dark'
-                ? 'bg-indigo-50 dark:bg-indigo-950 border-indigo-600 text-indigo-400'
-                : 'border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50'
+                ? 'bg-[#A31C1B]/15 border-[#A31C1B] text-rose-300 shadow-glow-crimson'
+                : 'border-white/10 text-slate-300 hover:bg-white/5'
             }`}
           >
             <span>🌙 Dark Mode</span>
@@ -171,15 +171,15 @@ export function SettingsPage() {
       {/* Workspace Collaborators Card */}
       {currentOrg && (
         <Card className="p-6">
-          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-1 flex items-center gap-2">
-            <Building className="w-4 h-4 text-indigo-600" /> Workspace Members ({currentOrg.name})
+          <h3 className="text-sm font-bold text-slate-100 mb-1 flex items-center gap-2">
+            <Building className="w-4 h-4 text-[#A31C1B]" /> Workspace Members ({currentOrg.name})
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
+          <p className="text-xs text-slate-400 mb-4">
             Invite colleagues by email to collaborate on projects within this workspace.
           </p>
 
           {inviteMsg && (
-            <div className="mb-4 p-3 rounded-xl bg-emerald-50 text-emerald-700 text-xs border border-emerald-200">
+            <div className="mb-4 p-3 rounded-xl bg-emerald-950/40 text-emerald-300 text-xs border border-emerald-800">
               {inviteMsg}
             </div>
           )}
@@ -191,18 +191,18 @@ export function SettingsPage() {
               value={inviteEmail}
               onChange={(e) => setInviteEmail(e.target.value)}
               required
-              className="flex-1 text-xs rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-3.5 py-2 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="flex-1 text-xs rounded-xl bg-[#06110C] border border-white/10 px-3.5 py-2 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-[#A31C1B] focus:border-[#A31C1B]"
             />
             <select
               value={inviteRole}
               onChange={(e) => setInviteRole(e.target.value)}
-              className="text-xs rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-3 py-2 text-slate-900 dark:text-slate-100"
+              className="text-xs rounded-xl bg-[#06110C] border border-white/10 px-3 py-2 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#A31C1B]"
             >
-              <option value="Team Member">Team Member</option>
-              <option value="Project Manager">Project Manager</option>
-              <option value="Viewer">Viewer</option>
+              <option value="Team Member" className="bg-[#171717]">Team Member</option>
+              <option value="Project Manager" className="bg-[#171717]">Project Manager</option>
+              <option value="Viewer" className="bg-[#171717]">Viewer</option>
             </select>
-            <Button type="submit" size="sm" icon={Send} loading={inviting}>
+            <Button type="submit" variant="crimson" size="sm" icon={Send} loading={inviting}>
               Send Invite
             </Button>
           </form>

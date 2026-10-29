@@ -9,7 +9,7 @@ const SIZES = {
 };
 
 const BG_COLORS = [
-  'bg-indigo-600',
+  'bg-rose-700',
   'bg-emerald-600',
   'bg-amber-600',
   'bg-rose-600',
@@ -47,7 +47,7 @@ export function Avatar({ user, name, avatarUrl, size = 'md', isOnline, className
         <img
           src={src}
           alt={userName}
-          className={`${sizeClass} rounded-full object-cover border border-slate-200 dark:border-slate-700`}
+          className={`${sizeClass} rounded-full object-cover border border-white/10`}
         />
       ) : (
         <div
@@ -58,7 +58,7 @@ export function Avatar({ user, name, avatarUrl, size = 'md', isOnline, className
       )}
       {isOnline !== undefined && (
         <span
-          className={`absolute bottom-0 right-0 block rounded-full ring-2 ring-white dark:ring-slate-900 ${
+          className={`absolute bottom-0 right-0 block rounded-full ring-2 ring-[#06110C] ${
             size === 'xs' || size === 'sm' ? 'w-2 h-2' : 'w-2.5 h-2.5'
           } ${isOnline ? 'bg-emerald-500' : 'bg-slate-400'}`}
         />

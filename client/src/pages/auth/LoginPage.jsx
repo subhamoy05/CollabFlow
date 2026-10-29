@@ -38,26 +38,26 @@ export function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#06110C] flex flex-col justify-center py-12 sm:px-6 lg:px-8 text-slate-100 selection:bg-[#A31C1B] selection:text-white">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <Link to="/" className="inline-flex items-center gap-2.5 mb-4">
-          <img src="/logo.svg" alt="CollabFlow" className="w-10 h-10 rounded-xl" />
-          <span className="font-extrabold text-2xl tracking-tight text-slate-900 dark:text-white">
-            Collab<span className="text-indigo-600 dark:text-indigo-400">Flow</span>
+        <Link to="/" className="inline-flex items-center gap-2.5 mb-4 group">
+          <img src="/logo.svg" alt="CollabFlow" className="w-10 h-10 rounded-xl shadow-md shadow-[#A31C1B]/20" />
+          <span className="font-extrabold text-2xl tracking-tight text-white">
+            Collab<span className="text-[#A31C1B]">Flow</span>
           </span>
         </Link>
-        <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+        <h2 className="text-2xl font-bold tracking-tight text-white">
           Sign in to your account
         </h2>
-        <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+        <p className="mt-1 text-xs text-slate-400">
           Welcome back! Access your workspaces, Kanban boards, and chats.
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
-        <div className="bg-white dark:bg-slate-900 py-8 px-6 sm:px-10 shadow-card border border-slate-200/80 dark:border-slate-800 rounded-2xl">
+        <div className="bg-[#171717] py-8 px-6 sm:px-10 shadow-2xl border border-white/10 rounded-2xl">
           {error && (
-            <div className="mb-5 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-xs text-rose-700 dark:text-rose-300">
+            <div className="mb-5 p-3 rounded-xl bg-[#A31C1B]/20 border border-[#A31C1B]/50 text-xs text-rose-300">
               {error}
             </div>
           )}
@@ -76,12 +76,12 @@ export function LoginPage() {
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label htmlFor="login-password" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                <label htmlFor="login-password" className="text-xs font-semibold text-slate-200">
                   Password
                 </label>
                 <Link
                   to="/forgot-password"
-                  className="text-xs font-medium text-indigo-600 dark:text-indigo-400 hover:underline"
+                  className="text-xs font-medium text-rose-400 hover:text-rose-300 hover:underline"
                 >
                   Forgot password?
                 </Link>
@@ -97,45 +97,45 @@ export function LoginPage() {
               />
             </div>
 
-            <Button type="submit" size="md" className="w-full" loading={loading}>
+            <Button type="submit" variant="crimson" size="md" className="w-full shadow-glow-crimson" loading={loading}>
               Sign In
             </Button>
           </form>
 
           {/* Quick Demo Logins for Fast Review */}
-          <div className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 text-center mb-3">
+          <div className="mt-6 pt-6 border-t border-white/10">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 text-center mb-3 font-mono">
               Quick Demo Logins
             </div>
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => fillDemo('admin@collabflow.dev')}
-                className="p-2 text-xs rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-left font-medium text-slate-700 dark:text-slate-300 flex items-center gap-1.5 transition-colors"
+                className="p-2 text-xs rounded-xl border border-white/10 bg-[#06110C] hover:border-[#A31C1B]/50 text-left font-medium text-slate-200 flex items-center gap-1.5 transition-colors"
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-rose-500" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#A31C1B]" />
                 <span>Admin</span>
               </button>
               <button
                 type="button"
                 onClick={() => fillDemo('alex.pm@collabflow.dev')}
-                className="p-2 text-xs rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-left font-medium text-slate-700 dark:text-slate-300 flex items-center gap-1.5 transition-colors"
+                className="p-2 text-xs rounded-xl border border-white/10 bg-[#06110C] hover:border-[#A31C1B]/50 text-left font-medium text-slate-200 flex items-center gap-1.5 transition-colors"
               >
-                <UserCheck className="w-3.5 h-3.5 text-indigo-500" />
+                <UserCheck className="w-3.5 h-3.5 text-rose-400" />
                 <span>Manager</span>
               </button>
               <button
                 type="button"
                 onClick={() => fillDemo('sarah.dev@collabflow.dev')}
-                className="p-2 text-xs rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-left font-medium text-slate-700 dark:text-slate-300 flex items-center gap-1.5 transition-colors"
+                className="p-2 text-xs rounded-xl border border-white/10 bg-[#06110C] hover:border-[#A31C1B]/50 text-left font-medium text-slate-200 flex items-center gap-1.5 transition-colors"
               >
-                <UserCheck className="w-3.5 h-3.5 text-emerald-500" />
+                <UserCheck className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Developer</span>
               </button>
               <button
                 type="button"
                 onClick={() => fillDemo('olivia.view@collabflow.dev')}
-                className="p-2 text-xs rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-left font-medium text-slate-700 dark:text-slate-300 flex items-center gap-1.5 transition-colors"
+                className="p-2 text-xs rounded-xl border border-white/10 bg-[#06110C] hover:border-[#A31C1B]/50 text-left font-medium text-slate-200 flex items-center gap-1.5 transition-colors"
               >
                 <UserCheck className="w-3.5 h-3.5 text-slate-400" />
                 <span>Viewer</span>
@@ -144,11 +144,11 @@ export function LoginPage() {
           </div>
         </div>
 
-        <p className="mt-6 text-center text-xs text-slate-600 dark:text-slate-400">
+        <p className="mt-6 text-center text-xs text-slate-400">
           Don't have an account?{' '}
           <Link
             to="/register"
-            className="font-semibold text-indigo-600 dark:text-indigo-400 hover:underline"
+            className="font-semibold text-rose-400 hover:text-rose-300 hover:underline"
           >
             Sign up free
           </Link>
