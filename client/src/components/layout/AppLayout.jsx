@@ -5,6 +5,7 @@ import { Topbar } from './Topbar';
 import { GlobalSearchModal } from './GlobalSearchModal';
 import { QuickTaskModal } from '../tasks/QuickTaskModal';
 import { ScrollProgressBar, ScrollToTopButton } from '../common/ScrollEffects';
+import { CursorSpotlight } from '../common/BackgroundEffects';
 
 export function AppLayout() {
   const [collapsed, setCollapsed] = useState(false);
@@ -25,13 +26,16 @@ export function AppLayout() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#06110C] text-slate-100 flex selection:bg-[#A31C1B] selection:text-white">
+    <div className="relative min-h-screen bg-slate-50 dark:bg-[#06110C] text-slate-900 dark:text-slate-100 flex selection:bg-[#A31C1B] selection:text-white transition-colors duration-300">
       {/* Top Real-time Scroll Progress Bar */}
       <ScrollProgressBar height={2.5} />
 
+      {/* Subtle cursor spotlight */}
+      <CursorSpotlight radius={500} color="rgba(163, 28, 27, 0.05)" />
+
       {/* Ambient background blur orbs */}
-      <div className="fixed top-0 right-1/4 -z-10 w-96 h-96 bg-[#A31C1B]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="fixed bottom-10 left-1/3 -z-10 w-96 h-96 bg-[#171717]/80 rounded-full blur-3xl pointer-events-none" />
+      <div className="fixed top-0 right-1/4 -z-10 w-96 h-96 bg-[#A31C1B]/8 dark:bg-[#A31C1B]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="fixed bottom-10 left-1/3 -z-10 w-96 h-96 bg-indigo-500/5 dark:bg-[#171717]/80 rounded-full blur-3xl pointer-events-none" />
 
       {/* Sidebar navigation */}
       <Sidebar
@@ -58,11 +62,19 @@ export function AppLayout() {
         </main>
       </div>
 
-      {/* Modals */}
-      <GlobalSearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
-      <QuickTaskModal isOpen={quickTaskOpen} onClose={() => setQuickTaskOpen(false)} />
+      {/* Quick Task Modal */}
+      <QuickTaskModal
+        isOpen={quickTaskOpen}
+        onClose={() => setQuickTaskOpen(false)}
+      />
 
-      {/* Floating Scroll to top button */}
+      {/* Global Search Modal */}
+      <GlobalSearchModal
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+      />
+
+      {/* Floating Scroll to Top */}
       <ScrollToTopButton threshold={300} />
     </div>
   );

@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 const VARIANTS = {
   primary: 'btn-shimmer bg-[#A31C1B] hover:bg-[#8A1716] text-white shadow-md shadow-[#A31C1B]/25 hover:shadow-[#A31C1B]/40 focus-visible:ring-[#A31C1B]',
-  secondary: 'bg-[#171717] hover:bg-[#222222] text-slate-200 border border-white/10 hover:border-[#A31C1B]/50 shadow-sm focus-visible:ring-[#A31C1B]',
-  outline: 'border border-[#A31C1B]/80 text-rose-400 hover:bg-[#A31C1B]/20 hover:text-white focus-visible:ring-[#A31C1B]',
+  secondary: 'bg-white dark:bg-[#171717] hover:bg-slate-100 dark:hover:bg-[#222222] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-white/10 hover:border-[#A31C1B]/50 shadow-sm focus-visible:ring-[#A31C1B]',
+  outline: 'border border-[#A31C1B]/80 text-[#A31C1B] dark:text-rose-400 hover:bg-[#A31C1B]/15 hover:text-[#A31C1B] dark:hover:text-white focus-visible:ring-[#A31C1B]',
   danger: 'bg-rose-600 hover:bg-rose-700 text-white shadow-sm shadow-rose-500/20 focus-visible:ring-rose-500',
-  ghost: 'text-slate-300 hover:bg-[#171717] hover:text-white focus-visible:ring-[#A31C1B]',
+  ghost: 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#171717] hover:text-slate-900 dark:hover:text-white focus-visible:ring-[#A31C1B]',
   brand: 'btn-shimmer bg-[#A31C1B] hover:bg-[#8A1716] text-white shadow-md shadow-[#A31C1B]/30 hover:shadow-[#A31C1B]/50 focus-visible:ring-[#A31C1B]',
-  gradient: 'btn-shimmer bg-gradient-to-r from-[#A31C1B] via-rose-600 to-[#A31C1B] hover:from-[#8A1716] hover:to-rose-700 text-white shadow-md shadow-[#A31C1B]/30 hover:shadow-[#A31C1B]/50 focus-visible:ring-[#A31C1B]',
-  glass: 'bg-[#171717]/80 hover:bg-[#171717] backdrop-blur-md text-slate-100 border border-white/10 hover:border-[#A31C1B]/50 shadow-sm focus-visible:ring-[#A31C1B]',
+  gradient: 'btn-shimmer bg-gradient-to-r from-[#A31C1B] via-rose-600 to-amber-600 hover:from-[#8A1716] hover:to-rose-700 text-white shadow-md shadow-[#A31C1B]/30 hover:shadow-[#A31C1B]/50 focus-visible:ring-[#A31C1B]',
+  glass: 'bg-white/70 dark:bg-[#171717]/80 hover:bg-white dark:hover:bg-[#171717] backdrop-blur-md text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-white/10 hover:border-[#A31C1B]/50 shadow-sm focus-visible:ring-[#A31C1B]',
   crimson: 'btn-shimmer bg-[#A31C1B] hover:bg-[#8A1716] text-white shadow-md shadow-[#A31C1B]/30 hover:shadow-[#A31C1B]/50 border border-[#A31C1B]/80 focus-visible:ring-[#A31C1B]',
-  crimsonOutline: 'border border-[#A31C1B]/80 text-rose-400 hover:bg-[#A31C1B]/20 hover:text-white focus-visible:ring-[#A31C1B]',
-  charcoal: 'bg-[#171717] hover:bg-[#242424] text-slate-100 border border-white/10 hover:border-[#A31C1B]/50 shadow-md focus-visible:ring-[#A31C1B]'
+  crimsonOutline: 'border border-[#A31C1B]/80 text-[#A31C1B] dark:text-rose-400 hover:bg-[#A31C1B]/15 dark:hover:bg-[#A31C1B]/20 hover:text-slate-950 dark:hover:text-white focus-visible:ring-[#A31C1B]',
+  charcoal: 'bg-slate-100 dark:bg-[#171717] hover:bg-slate-200 dark:hover:bg-[#242424] text-slate-800 dark:text-slate-100 border border-slate-200 dark:border-white/10 hover:border-[#A31C1B]/50 shadow-sm focus-visible:ring-[#A31C1B]'
 };
 
 const SIZES = {
@@ -30,18 +30,60 @@ export function Button({
   disabled = false,
   icon: Icon,
   className = '',
+  magnetic = false,
   onClick,
   ...props
 }) {
+  const btnRef = useRef(null);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [transition, setTransition] = useState('transform 0.2s ease-out');
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    }
+  }, []);
+
+  const handleMouseMove = (e) => {
+    if (!magnetic || reducedMotion || !btnRef.current) return;
+    const rect = btnRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const dx = (e.clientX - centerX) * 0.28;
+    const dy = (e.clientY - centerY) * 0.28;
+
+    setTransition('transform 0.1s ease-out');
+    setOffset({ x: dx, y: dy });
+  };
+
+  const handleMouseLeave = () => {
+    if (!magnetic || reducedMotion) return;
+    setTransition('transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)');
+    setOffset({ x: 0, y: 0 });
+  };
+
   const variantClass = VARIANTS[variant] || VARIANTS.primary;
   const sizeClass = SIZES[size] || SIZES.md;
 
   return (
     <button
+      ref={btnRef}
       type={type}
       disabled={disabled || loading}
       onClick={onClick}
-      className={`inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 select-none ${variantClass} ${sizeClass} ${className}`}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={
+        magnetic && !reducedMotion
+          ? {
+              transform: `translate3d(${offset.x}px, ${offset.y}px, 0)`,
+              transition
+            }
+          : undefined
+      }
+      className={`inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 select-none ${variantClass} ${sizeClass} ${className}`}
       {...props}
     >
       {loading ? (
